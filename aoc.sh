@@ -49,4 +49,10 @@ function aoc_get_data() {
     
     echo $input > $AOC_DIR/input.txt
     echo "Data for day $day of year $year has been saved to $AOC_DIR/input.txt."
+
+    # Create new files for the solution, part_1.py and part_2.py
+    rm -f $AOC_DIR/part_1.py
+    rm -f $AOC_DIR/part_2.py
+    touch $AOC_DIR/part_1.py
+    touch $AOC_DIR/part_2.py
 }
