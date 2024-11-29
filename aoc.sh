@@ -9,6 +9,54 @@ function aoc() {
     if [ $1 = "get" ]; then
         aoc_get_data $2 $3
     fi
+    if [ $1 = "run" ]; then
+        aoc_run_solution $2
+    fi
+    if [ $1 = "day" ]; then
+        aoc_get_day
+    fi
+}
+
+# Simply print the current year and day.
+function aoc_get_day() {
+    year=$(date +"%Y")
+    day=$(date +"%d")
+    echo "year: $year, day: $day"
+}
+
+# Run the solution for the current day, so run part_1.py and part_2.py.
+# Print part 1 in red, part 2 in green. If $2 is either 1 or 2 it will only
+# run that part.
+function aoc_run_solution() {
+    if [ -z $1 ]; then
+        part=0
+    else
+        part=$1
+    fi
+
+    if [ $part -eq 1 ]; then
+        echo "Solution for part 1:"
+        output=$(python3 $AOC_DIR/part_1.py)
+        echo "\033[0;31m$output\033[0m" # Red
+        return 0
+    fi
+
+    if [ $part -eq 2 ]; then
+        echo "Solution for part 2:"
+        output=$(python3 $AOC_DIR/part_2.py)
+        echo "\033[0;32m$output\033[0m" # Green
+        return 0
+    fi
+
+    # Print the solution for part 1
+    echo "Solution for part 1:"
+    output=$(python3 $AOC_DIR/part_1.py)
+    echo "\033[0;31m$output\033[0m" # Red
+
+    # Print the solution for part 2
+    echo "Solution for part 2:"
+    python3 $AOC_DIR/part_2.py
+    echo "\032[0;31m$output\033[0m" # Green
 }
 
 # Get the data for a specfic year and day. If $1 and $2 are not set, it will default to the current year and day.
