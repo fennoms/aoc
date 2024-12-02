@@ -88,6 +88,11 @@ function aoc_get_data() {
         return 1
     fi
 
+    # if the day starts with a 0 we have to remove it
+    if [ ${day:0:1} = "0" ]; then
+        day=${day:1}
+    fi
+
     input=$(curl --cookie "session=$AOC_SESSION" https://adventofcode.com/$year/day/$day/input)
 
     if [ $input = "Puzzle inputs differ by user.  Please log in to get your puzzle input." ]; then
