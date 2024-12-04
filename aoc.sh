@@ -15,6 +15,30 @@ function aoc() {
     if [ $1 = "day" ]; then
         aoc_get_day
     fi
+    if [ $1 = "finish" ]; then
+        aoc_move_files $2 $3
+    fi
+}
+
+# move part_1.py and part_2.py to the correct day.
+function aoc_move_files() {
+    if [ -z $1 ] || [ -z $2 ]; then
+        year=$(date +"%Y")
+        day=$(date +"%d")
+
+        if [ ${day:0:1} = "0" ]; then
+            day=${day:1}
+        fi
+    else
+        year=$1
+        day=$2
+    fi
+
+    mkdir -p $AOC_DIR/$year
+    mkdir -p $AOC_DIR/$year/$day
+
+    mv $AOC_DIR/part_1.py $AOC_DIR/$year/$day/part_1.py
+    mv $AOC_DIR/part_2.py $AOC_DIR/$year/$day/part_2.py
 }
 
 # Simply print the current year and day.
