@@ -1,3 +1,6 @@
+# Thanks to hyperneutrino https://www.youtube.com/watch?v=layyhtQQuM0&t=446s
+# for the explanation using a BFS instead of a DFS.
+
 from collections import deque
 
 
